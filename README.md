@@ -1,0 +1,3 @@
+# DevOps Git Practice
+Learning Git hands on!
+Created by Seshanand

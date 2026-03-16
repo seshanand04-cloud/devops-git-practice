@@ -1,3 +1,3 @@
 Welcome to our app!
-Developer: Ravi Kumar
+Developer: Seshanand
 Version: 1.0

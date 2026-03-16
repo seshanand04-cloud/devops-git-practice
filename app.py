@@ -1,3 +1,3 @@
 Welcome to our app!
-Developer: Not assigned
+Developer: Seshanand
 Version: 1.0

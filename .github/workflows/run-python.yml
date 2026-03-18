@@ -1,46 +1,25 @@
-# Name of your workflow
-# This shows in GitHub Actions tab
 name: Run Python Hello World
 
-# TRIGGER - When should this run?
-# on: push = run when code is pushed
-# branches: [main] = only on main branch
 on:
   push:
     branches:
       - main
 
-# JOBS - What should run?
 jobs:
-
-  # Job name
   run-hello-world:
-
-    # What machine to use?
-    # ubuntu-latest = GitHub provides
-    # a free Linux machine!
     runs-on: ubuntu-latest
 
-    # STEPS - What to do step by step
     steps:
-
-      # Step 1: Download your code
-      # Without this, runner doesn't
-      # have your files!
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # Step 2: Install Python
-      # Runner needs Python to run .py files
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
-      # Step 3: Verify Python installed
       - name: Check Python version
         run: python --version
 
-      # Step 4: Run your Python file!
-      - name: Run hello.py
-        run: python hello.py
+      - name: Run python.py
+        run: python python.py

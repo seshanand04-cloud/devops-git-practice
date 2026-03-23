@@ -19,4 +19,4 @@ jobs:
           python-version: '3.11'
 
       - name: Run greet.py
-        run: python greet.py
+        run: python python.py

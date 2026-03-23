@@ -1,4 +1,4 @@
-name: Run Greet Program
+name: Run Greetings Program
 
 on:
   push:

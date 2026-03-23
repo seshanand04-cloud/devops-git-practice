@@ -3,7 +3,7 @@ name: simple program to run
 on:
   push:
     branches:
-        -main
+       -main
 
 jobs:
   run-program:

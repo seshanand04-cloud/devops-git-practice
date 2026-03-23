@@ -1,22 +1,22 @@
-name: simple program to run
+name: Run Greet Program
 
 on:
   push:
     branches:
-       -main
+      - main
 
 jobs:
-  run-program:
+  run-greet:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: run python.py
+      - name: Run greet.py
         run: python greet.py

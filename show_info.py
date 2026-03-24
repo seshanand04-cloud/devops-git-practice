@@ -1,8 +1,6 @@
-from datetime import date, datetime 
+name = "Seshanand"
+role = "DevOps Engineer"
 
-
-
-print("Code Push Detected!")
-today = datetime.today()
-print(f"Date: {today}")
-print(f"Time: {datetime.datetime.now().strftime('%H:%M:%S')}")
+print("Hello " + name + "!")
+print("Role: " + role)
+print("Welcome to GitHub Actions!")

@@ -1,0 +1,35 @@
+name: sending email
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    sending_email:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+
+            - name: setup python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3,11'
+
+            
+            - name: Send Deployment Email
+              uses: wesdevteam/maileraction@v1
+              with:
+                to: seshanandsaravanan04@gmail.com
+                subject: "✅ Production Deployment Complete"
+                text: "The deployment was completed successfully."
+                html: "<p>The <strong>deployment</strong> to production was successful 🎉</p>"
+              env:
+                MAIL: ${{ secrets.MAIL }}
+                MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+                MAIL_HOST: ${{ secrets.MAIL_HOST }}
+                MAIL_PORT: ${{ secrets.MAIL_PORT }}
+
+            

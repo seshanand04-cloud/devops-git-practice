@@ -1,22 +1,22 @@
-name: Run datetime program
+name: Run DateTime Program
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    run-datetime:
-        runs-on: ubuntu-latest
+  run-datetime:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Setup python
-              uses: actions/setup-python@v5
-              with:
-                python-version: '3.11'
-            
-            - name: Run datetime.py
-              run: python datetime.py
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run show_info.py
+        run: python show_info.py

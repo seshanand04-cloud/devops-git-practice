@@ -1,35 +1,39 @@
-name: sending email
+name: Notify on Push to Main
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    sending_email:
-        runs-on: ubuntu-latest
+  notify-on-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send push notification email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: ${{ secrets.MAIL_USERNAME }}
+          to: ${{ github.event.pusher.email }}
+          subject: "📦 Push to main by ${{ github.actor }}"
+          body: |
+            Hello ${{ github.event.pusher.name }},
 
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
+            A new push was made to the main branch.
 
-            - name: setup python
-              uses: actions/setup-python@v5
-              with:
-                python-version: '3,11'
+            📌 Details:
+            - Repository : ${{ github.repository }}
+            - Pushed by  : ${{ github.actor }}
+            - Branch     : ${{ github.ref_name }}
+            - Commit SHA : ${{ github.sha }}
+            - Commit Msg : ${{ github.event.head_commit.message }}
+            - Timestamp  : ${{ github.event.head_commit.timestamp }}
 
-            
-            - name: Send Deployment Email
-              uses: wesdevteam/maileraction@v1
-              with:
-                to: seshanandsaravanan04@gmail.com
-                subject: "✅ Production Deployment Complete"
-                text: "The deployment was completed successfully."
-                html: "<p>The <strong>deployment</strong> to production was successful 🎉</p>"
-              env:
-                MAIL: ${{ secrets.MAIL }}
-                MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-                MAIL_HOST: ${{ secrets.MAIL_HOST }}
-                MAIL_PORT: ${{ secrets.MAIL_PORT }}
+            View the commit:
+            ${{ github.event.head_commit.url }}
 
-            
+            — GitHub Actions

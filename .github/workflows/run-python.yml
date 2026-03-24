@@ -2,6 +2,12 @@ name: Run Python Hello World
 
 on:
   workflow_dispatch:
+     inputs:
+        configuration:
+           description: 'Configuration for the program'
+           type: choice
+           required: true
+           options: ['prod', 'dev', 'stage']
   # push:
   #   branches:
   #     - main
@@ -24,3 +30,6 @@ jobs:
 
       - name: Run python.py
         run: python python.py
+
+      - name: Print configuration
+        run: echo "Configuration is ${{ inputs. Configuration }}"

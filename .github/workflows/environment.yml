@@ -1,0 +1,80 @@
+name: Run Environment Program
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select Environment'
+        required: true
+        type: choice
+        options:
+          - prod
+          - dev
+          - stage
+
+jobs:
+  run-environment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Show Selected Info
+        run: |
+          echo "================================"
+          echo "Branch      : ${{ github.ref_name }}"
+          echo "Environment : ${{ github.event.inputs.environment }}"
+          echo "================================"
+
+      - name: Check Branch and Environment Match
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          ENV="${{ github.event.inputs.environment }}"
+
+          if [ "$BRANCH" = "main" ] && [ "$ENV" != "prod" ]; then
+            echo "❌ ERROR: main branch must use prod!"
+            echo "You selected branch=main + env=$ENV"
+            echo "✅ Correct way: branch=main + env=prod"
+            exit 1
+          fi
+
+          if [ "$BRANCH" = "dev" ] && [ "$ENV" != "dev" ]; then
+            echo "❌ ERROR: dev branch must use dev!"
+            echo "You selected branch=dev + env=$ENV"
+            echo "✅ Correct way: branch=dev + env=dev"
+            exit 1
+          fi
+
+          if [ "$BRANCH" = "stage" ] && [ "$ENV" != "stage" ]; then
+            echo "❌ ERROR: stage branch must use stage!"
+            echo "You selected branch=stage + env=$ENV"
+            echo "✅ Correct way: branch=stage + env=stage"
+            exit 1
+          fi
+
+          echo "✅ Branch and Environment match! Continuing..."
+
+      - name: Run Production Program
+        if: ${{ github.ref_name == 'main' && github.event.inputs.environment == 'prod' }}
+        run: python prod.py
+
+      - name: Run Development Program
+        if: ${{ github.ref_name == 'dev' && github.event.inputs.environment == 'dev' }}
+        run: python dev.py
+
+      - name: Run Staging Program
+        if: ${{ github.ref_name == 'stage' && github.event.inputs.environment == 'stage' }}
+        run: python stage.py
+
+      - name: Success!
+        run: |
+          echo "================================"
+          echo "✅ ${{ github.event.inputs.environment }} completed!"
+          echo "Branch : ${{ github.ref_name }}"
+          echo "================================"

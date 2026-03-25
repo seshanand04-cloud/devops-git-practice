@@ -1,9 +1,10 @@
 name: Notify on Push to Main
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+#   push:
+#     branches:
+#       - main
 
 jobs:
   notify-on-push:

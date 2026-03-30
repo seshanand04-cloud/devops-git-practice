@@ -14,20 +14,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
       - name: Run Python Script
-        shell: pwsh
         run: python python.py
 
       - name: Zip Python Files
-        shell: pwsh
-        run: |
-          Compress-Archive -Path "*.py" -DestinationPath "release.zip" -Force
-          Write-Host "Zip created successfully!"
+        run: Compress-Archive -Path "*.py" -DestinationPath "release.zip" -Force
+        shell: powershell
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

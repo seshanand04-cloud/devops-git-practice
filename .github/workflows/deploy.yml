@@ -14,8 +14,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # ← Setup Python step REMOVED
-
       - name: Run Python Script
         shell: pwsh
         run: python python.py

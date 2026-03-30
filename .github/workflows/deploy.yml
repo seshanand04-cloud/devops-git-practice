@@ -18,10 +18,7 @@ jobs:
         run: python python.py
 
       - name: Zip Python Files
-        shell: pwsh
-        run: |
-          Compress-Archive -Path "*.py" -DestinationPath "release.zip" -Force
-          Write-Host "Zip created successfully!"
+        run: zip release.zip *.py
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

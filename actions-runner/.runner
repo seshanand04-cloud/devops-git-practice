@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 21,
+  "agentName": "MSI",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus13.actions.githubusercontent.com/bYXgIad5QFi36j0ki3mntrdAIqSKqNFGgybGJs8Nj6rea4IobB/",
+  "gitHubUrl": "https://github.com/seshanand04-cloud/devops-git-practice",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}

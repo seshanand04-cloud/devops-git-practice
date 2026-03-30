@@ -18,7 +18,8 @@ jobs:
         run: python python.py
 
       - name: Zip Python Files
-        run: zip release.zip *.py
+        run: Compress-Archive -Path "*.py" -DestinationPath "release.zip" -Force
+        shell: powershell
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
